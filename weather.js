@@ -60,7 +60,9 @@ let weather = {
 function getCityName() {
     let city_Name;
     //* city_Name = document.querySelector('#search-input').textContent; the next line works fine but this should work instead of that
-    return city_Name = document.querySelector('input').value;
+    document.querySelector('input').value = null ? document.querySelector('input').textContent :
+        city_Name = document.querySelector('input').value = 'Enter city first';
+    return city_Name;
 }
 
 document.querySelector('#search-btn').addEventListener('click', function () {
