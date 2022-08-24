@@ -77,35 +77,35 @@ document.body.addEventListener('keyup', function (event) {
 
 //* battery api
 
-navigator.getBattery().then((battery) => {
-    let BatteryState = function () {
-        updateChargeInfo();
-        updateLevelInfo();
+// navigator.getBattery().then((battery) => {
+//     let BatteryState = function () {
+//         updateChargeInfo();
+//         updateLevelInfo();
 
-    }
-    BatteryState();
+//     }
+//     BatteryState();
 
 
 
-});
-battery.addEventListener('chargingchange', 'levelchange', () => {
-    updateChargeInfo();
-});
-function updateChargeInfo() {
-    let charge = battery.charging
-    if (charge === true) {
-        document.querySelector('#battery-text').textContent = 'Plugged in⚡'
-    }
-    else {
-        battery.addEventListener('levelchange', () => {
-            updateLevelInfo();
-        });
-    }
-}
+// });
+// battery.addEventListener('chargingchange', 'levelchange', () => {
+//     updateChargeInfo();
+// });
+// function updateChargeInfo() {
+//     let charge = battery.charging
+//     if (charge === true) {
+//         document.querySelector('#battery-text').textContent = 'Plugged in⚡'
+//     }
+//     else {
+//         battery.addEventListener('levelchange', () => {
+//             updateLevelInfo();
+//         });
+//     }
+// }
 
-function updateLevelInfo() {
-    document.querySelector('#battery-text').textContent = `${battery.level * 100}%`;
-}
+// function updateLevelInfo() {
+//     document.querySelector('#battery-text').textContent = `${battery.level * 100}%`;
+// }
 
 
 
