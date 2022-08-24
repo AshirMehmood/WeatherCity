@@ -1,25 +1,25 @@
-// to get geo location co ordinates when needed
+//to get geo location co ordinates when needed
 
-// const options = {
-//     enableHighAccuracy: true,
-//     timeout: 5000,
-//     maximumAge: 0
-// };
+const options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+};
 
-// function success(pos) {
-//     const crd = pos.coords;
+function success(pos) {
+    const crd = pos.coords;
 
-//     console.log('Your current position is:');
-//     console.log(`Latitude : ${crd.latitude}`);
-//     console.log(`Longitude: ${crd.longitude}`);
-//     console.log(`More or less ${crd.accuracy} meters.`);
-// }
+    console.log('Your current position is:');
+    console.log(`Latitude : ${crd.latitude}`);
+    console.log(`Longitude: ${crd.longitude}`);
+    console.log(`More or less ${crd.accuracy} meters.`);
+}
 
-// function error(err) {
-//     console.warn(`ERROR(${err.code}): ${err.message}`);
-// }
+function error(err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+}
 
-// navigator.geolocation.getCurrentPosition(success, error, options); // can be used to fetch location automatically
+navigator.geolocation.getCurrentPosition(success, error, options); // can be used to fetch location automatically
 
 let weather = {
     "api_Key": '50909ffea1644d4e8cf103401221807',
