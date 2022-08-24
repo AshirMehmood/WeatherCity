@@ -31,24 +31,28 @@ let weather = {
     },
 
     displayWeather: function (data) {
-        const { name } = data.location;
-        const { text } = data.current.condition;
-        const { temp_c } = data.current;
-        const { wind_mph } = data.current;
-        const { temp_f } = data.current;
-        const { icon } = data.current.condition;
-        const { humidity } = data.current;
-        //  console.log(text, name, temp_c, wind_mph, temp_f, icon, humidity);
-        document.querySelector('.city').textContent = 'Weather in ' + name;
-        //* document.querySelector('#weather-icon').src = 'https://www.weatherapi.com/api-explorer.aspx#forecast' + icon;
-        document.querySelector('.temp').textContent = temp_c + '°C';
-        document.querySelector('.temp_fahrenheit').textContent = temp_f + '° Fahrenheit';
-        document.querySelector('.desc').textContent = text;
-        document.querySelector('.humidity').textContent = 'Humidity : ' + humidity + '%';
-        document.querySelector('.wind').textContent = 'Wind: ' + wind_mph + ' Km/h';
-        document.querySelector('.weather').classList.remove('weather-visibility');
-        document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?" + name + "')";
-
+        if (data.location === undefined) {
+            alert("Enter a valid city name !")
+        }
+        else {
+            const { name } = data.location;
+            const { text } = data.current.condition;
+            const { temp_c } = data.current;
+            const { wind_mph } = data.current;
+            const { temp_f } = data.current;
+            const { icon } = data.current.condition;
+            const { humidity } = data.current;
+            //  console.log(text, name, temp_c, wind_mph, temp_f, icon, humidity);
+            document.querySelector('.city').textContent = 'Weather in ' + name;
+            //* document.querySelector('#weather-icon').src = 'https://www.weatherapi.com/api-explorer.aspx#forecast' + icon;
+            document.querySelector('.temp').textContent = temp_c + '°C';
+            document.querySelector('.temp_fahrenheit').textContent = temp_f + '° Fahrenheit';
+            document.querySelector('.desc').textContent = text;
+            document.querySelector('.humidity').textContent = 'Humidity : ' + humidity + '%';
+            document.querySelector('.wind').textContent = 'Wind: ' + wind_mph + ' Km/h';
+            document.querySelector('.weather').classList.remove('weather-visibility');
+            document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?" + name + "')";
+        }
     },
     search: function (city_Name) {
 
@@ -58,11 +62,15 @@ let weather = {
 
 };
 function getCityName() {
-    let city_Name;
+    let city_Name = document.querySelector('#search-input').value;
     //* city_Name = document.querySelector('#search-input').textContent; the next line works fine but this should work instead of that
-    document.querySelector('input').value = null ? document.querySelector('input').textContent :
-        city_Name = document.querySelector('input').value = 'Enter city first';
-    return city_Name;
+    if (city_Name === "") {
+        // document.querySelector('#search-input').placeholder = "Please Enter City First !";
+        alert("Please Enter City First !")
+    }
+    else {
+        return city_Name;
+    }
 }
 
 document.querySelector('#search-btn').addEventListener('click', function () {
@@ -70,7 +78,6 @@ document.querySelector('#search-btn').addEventListener('click', function () {
     weather.search(getCityName());
 });
 document.body.addEventListener('keyup', function (event) {
-    getCityName();
     if (event.key === 'Enter') {
         weather.search(getCityName());
     }
@@ -113,8 +120,8 @@ document.body.addEventListener('keyup', function (event) {
 
 
 //* updates about weather
-// let city_ft = document.querySelector('#search-input-weathermap').textContent
-// document.querySelector('#search-btn-weathermap').addEventListener('onclick', function () {
-//     fetch("https://api.weatherapi.com/v1/current.json?key=" + this.api_Key + "&q=" + city_ft
-//         + "&aqi=no").then((response) => response.json()).then((data) => this.weatherForcast(data));
-// });
+let city_ft = document.querySelector('#search-input-weathermap').textContent
+document.querySelector('#search-btn-weathermap').addEventListener('onclick', function () {
+    fetch("https://api.weatherapi.com/v1/current.json?key=" + this.api_Key + "&q=" + city_ft
+        + "&aqi=no").then((response) => response.json()).then((data) => this.weatherForcast(data));
+});
