@@ -6,7 +6,7 @@ body {
 .hero-pic {
     height: 100vh;
     width: 99vw;
-    background-image: url(pexels-david-selbert-6468238.jpg);
+    background-image: url(desktopbg.jpg);
     background-size: cover;
 }
 
@@ -21,7 +21,7 @@ body {
 
 .search-bar {
     position: relative;
-    left: 30rem;
+    left: 28rem;
     height: 100px;
     width: 290px;
     top: 10rem;
