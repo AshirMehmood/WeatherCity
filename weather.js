@@ -24,7 +24,7 @@
 let weather = {
     "api_Key": '50909ffea1644d4e8cf103401221807',
     get_Weather: function (city_Name) {
-        fetch("httpsgi://api.weatherapi.com/v1/current.json?key=" + this.api_Key + "&q=" + city_Name
+        fetch("https://api.weatherapi.com/v1/current.json?key=" + this.api_Key + "&q=" + city_Name
             + "&aqi=no").then((response) => response.json()).then((data) => this.displayWeather(data)); //closure
         // data variable holds the json 
 
