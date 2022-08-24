@@ -111,8 +111,8 @@ document.body.addEventListener('keyup', function (event) {
 
 
 //* updates about weather
-let city_ft = document.querySelector('#search-input-weathermap').textContent
-document.querySelector('#search-btn-weathermap').addEventListener('onclick', function () {
-    fetch("https://api.weatherapi.com/v1/current.json?key=" + this.api_Key + "&q=" + city_ft
-        + "&aqi=no").then((response) => response.json()).then((data) => this.weatherForcast(data));
-});
+// let city_ft = document.querySelector('#search-input-weathermap').textContent
+// document.querySelector('#search-btn-weathermap').addEventListener('onclick', function () {
+//     fetch("https://api.weatherapi.com/v1/current.json?key=" + this.api_Key + "&q=" + city_ft
+//         + "&aqi=no").then((response) => response.json()).then((data) => this.weatherForcast(data));
+// });
