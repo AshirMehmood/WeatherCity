@@ -24,7 +24,7 @@
 let weather = {
     "api_Key": '50909ffea1644d4e8cf103401221807',
     get_Weather: function (city_Name) {
-        fetch("http://api.weatherapi.com/v1/current.json?key=" + this.api_Key + "&q=" + city_Name
+        fetch("httpsgi://api.weatherapi.com/v1/current.json?key=" + this.api_Key + "&q=" + city_Name
             + "&aqi=no").then((response) => response.json()).then((data) => this.displayWeather(data)); //closure
         // data variable holds the json 
 
@@ -113,6 +113,6 @@ document.body.addEventListener('keyup', function (event) {
 //* updates about weather
 let city_ft = document.querySelector('#search-input-weathermap').textContent
 document.querySelector('#search-btn-weathermap').addEventListener('onclick', function () {
-    fetch("http://api.weatherapi.com/v1/current.json?key=" + this.api_Key + "&q=" + city_ft
+    fetch("https://api.weatherapi.com/v1/current.json?key=" + this.api_Key + "&q=" + city_ft
         + "&aqi=no").then((response) => response.json()).then((data) => this.weatherForcast(data));
 });
