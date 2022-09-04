@@ -1,3 +1,4 @@
+import * as nullchecker from "/util.js"
 //to get geo location co ordinates when needed
 
 const options = {
@@ -24,15 +25,8 @@ navigator.geolocation.getCurrentPosition(success, error, options); // can be use
 let weather = {
   api_Key: "50909ffea1644d4e8cf103401221807",
   get_Weather: function (city_Name) {
-    fetch(
-      "https://api.weatherapi.com/v1/current.json?key=" +
-        this.api_Key +
-        "&q=" +
-        city_Name +
-        "&aqi=no"
-    )
-      .then((response) => response.json())
-      .then((data) => this.displayWeather(data)); //closure
+    fetch("https://api.weatherapi.com/v1/current.json?key=" + this.api_Key + "&q=" + city_Name +"&days=7" +
+     "&aqi=no"+"&alert=yes").then((response) => response.json()).then((data) => this.displayWeather(data)); //closure
     // data variable holds the json
   },
 
@@ -70,14 +64,22 @@ function getCityName() {
 }
 
 document.querySelector("#search-btn").addEventListener("click", function () {
- 
+ if(getCityName().length==0){
+  nullchecker.setHomeEmptyBarToError();
+ }
+ else{
     weather.search(getCityName());
-  
+ }
 });
 
 document.body.addEventListener("keyup", function (event) {
   if (event.key === "Enter") {
+    if(getCityName().length==0){
+      nullchecker.setHomeEmptyBarToError();
+    }
+    else{
     weather.search(getCityName());
+    }
   }
 });
 
@@ -111,18 +113,4 @@ document.body.addEventListener("keyup", function (event) {
 //     document.querySelector('#battery-text').textContent = `${battery.level * 100}%`;
 // }
 
-//* updates about weather
-let city_ft = document.querySelector("#search-input-weathermap").textContent;
-document
-  .querySelector("#search-btn-weathermap")
-  .addEventListener("onclick", function () {
-    fetch(
-      "https://api.weatherapi.com/v1/current.json?key=" +
-        this.api_Key +
-        "&q=" +
-        city_ft +
-        "&aqi=no"
-    )
-      .then((response) => response.json())
-      .then((data) => this.weatherForcast(data));
-  });
+
