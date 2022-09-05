@@ -1,4 +1,4 @@
-import * as nullchecker from "/util.js"
+// import * as nullchecker from "/util.js"
 //* updates about weather
 let weatherForecast={
     api_Key: "50909ffea1644d4e8cf103401221807",
@@ -33,11 +33,21 @@ let weatherForecast={
         //* city_Name = document.querySelector('#search-input').textContent; the next line works fine but this should work instead of that
         return city_ft;
       }
+      function setEmptyBarToDefault(){
+        document.querySelector('#search-input-weathermap').style.color='green';
+        document.querySelector('#search-input-weathermap').placeholder='Search for city';
+    }
+    
+    function setEmptyBarToError(){
+        document.querySelector('#search-input-weathermap').style.color='red';
+        document.querySelector('#search-input-weathermap').placeholder="Enter a valid city name, search box can't be empty !";
+       setTimeout(setEmptyBarToDefault,5000);
+    }
     //* Button event listener on forecast page
     document.querySelector("#search-btn-weathermap").addEventListener("onclick", function () {
     let city_ft = document.querySelector("#search-input-weathermap").value;
     if (getCityName().length==0) {
-        nullchecker.setEmptyBarToError();
+        setEmptyBarToError();
         }
         else{
           weatherForecast.fetchForecastWeather(getCityName());
@@ -47,7 +57,7 @@ let weatherForecast={
     document.body.addEventListener("keyup", function (event) {
     if(event.key==="Enter")
     if (getCityName().length==0) {
-      nullchecker.setEmptyBarToError();
+      setEmptyBarToError();
       }
       else{
         weatherForecast.fetchForecastWeather(getCityName());

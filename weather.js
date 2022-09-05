@@ -1,26 +1,14 @@
-import * as nullchecker from "/util.js"
-//to get geo location co ordinates when needed
+// import * as nullchecker from "/util.js"
+//* to get geo location co ordinates when needed
+navigator.geolocation.getCurrentPosition((position)=>{
+  let lat = position.coords.latitude;
+  let long = position.coords.longitude;
+  lat.toFixed(2);
+  long.toFixed(2);
+weather.get_Weather(lat+" "+long);
 
-const options = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 0,
-};
+})
 
-function success(pos) {
-  const crd = pos.coords;
-
-  console.log("Your current position is:");
-  console.log(`Latitude : ${crd.latitude}`);
-  console.log(`Longitude: ${crd.longitude}`);
-  console.log(`More or less ${crd.accuracy} meters.`);
-}
-
-function error(err) {
-  console.warn(`ERROR(${err.code}): ${err.message}`);
-}
-
-navigator.geolocation.getCurrentPosition(success, error, options); // can be used to fetch location automatically
 
 let weather = {
   api_Key: "50909ffea1644d4e8cf103401221807",
@@ -53,19 +41,32 @@ let weather = {
       document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?" + name + "')";
     }
   },
+  
   search: function (city_Name) {
     this.get_Weather(city_Name);
   },
 };
+
+function setHomeEmptyBarToDefault(){
+    document.querySelector('#search-input').style.color='#cbb2d8';
+    document.querySelector('#search-input').placeholder='Search city';
+}
+
+function setHomeEmptyBarToError(){
+    document.querySelector('#search-input').style.color='red';
+    document.querySelector('#search-input').placeholder="Enter a valid city name, search box can't be empty !";
+    setTimeout(setHomeEmptyBarToDefault,5000);
+}
+
 function getCityName() {
-  let city_Name = document.querySelector("#search-input").value;
-  //* city_Name = document.querySelector('#search-input').textContent; the next line works fine but this should work instead of that
-  return city_Name;
+     let city_Name = document.querySelector("#search-input").value;
+     //* city_Name = document.querySelector('#search-input').textContent; the next line works fine but this should work instead of that
+     return city_Name;
 }
 
 document.querySelector("#search-btn").addEventListener("click", function () {
  if(getCityName().length==0){
-  nullchecker.setHomeEmptyBarToError();
+   setHomeEmptyBarToError();
  }
  else{
     weather.search(getCityName());
@@ -75,7 +76,7 @@ document.querySelector("#search-btn").addEventListener("click", function () {
 document.body.addEventListener("keyup", function (event) {
   if (event.key === "Enter") {
     if(getCityName().length==0){
-      nullchecker.setHomeEmptyBarToError();
+      setHomeEmptyBarToError();
     }
     else{
     weather.search(getCityName());
