@@ -13,13 +13,11 @@ let weatherForecast={
         
   for(let x=1;x<3;x++){
     const {date}=data.forecast.forecastday[x];
-    const {maxtemp_c}=data.forecast.forecastday[x].day;
-    const {mintemp_c}=data.forecast.forecastday[x].day;
+    const {avgtemp_c}=data.forecast.forecastday[x].day;
     const {text}=data.forecast.forecastday[x].day.condition;
     const {daily_chance_of_rain}=data.forecast.forecastday[x].day;
     document.querySelector(`#day${x}`).textContent=date;
-    document.querySelector(`#maxtemp${x}`).textContent=maxtemp_c+"c";
-    document.querySelector(`#mintemp${x}`).textContent=mintemp_c+"c";
+    document.querySelector(`#temp${x}`).textContent=avgtemp_c+"c";
     document.querySelector(`#desc${x}`).textContent=text;
     document.querySelector(`#rain${x}`).textContent=  daily_chance_of_rain+'%';
   }
