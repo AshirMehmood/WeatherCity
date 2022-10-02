@@ -42,7 +42,7 @@ let weatherForecast={
        setTimeout(setEmptyBarToDefault,5000);
     }
     //* Button event listener on forecast page
-    document.querySelector("#search-btn-weathermap").addEventListener("onclick", function () {
+    document.getElementById("search-btn-weathermap").addEventListener("onclick", function () {
     let city_ft = document.querySelector("#search-input-weathermap").value;
     if (getCityName().length==0) {
         setEmptyBarToError();
